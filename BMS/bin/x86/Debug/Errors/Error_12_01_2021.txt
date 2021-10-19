@@ -1,0 +1,19 @@
+15:26:00:threadShowAndonDetails(): System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'frmProductCheckHistory1'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at System.Windows.Forms.Control.Invoke(Delegate method)
+   at System.Windows.Forms.Control.Invoke(Delegate method)
+   at BMS.frmProductCheckHistory1.checkFreezeAll() in D:\project\Sumitomo\Line\Altax\Line\current\Line-11-01-2021 - Copy\Forms\frmProductCheckHistory1.cs:line 171
+   at BMS.frmProductCheckHistory1.threadShowAndonDetails() in D:\project\Sumitomo\Line\Altax\Line\current\Line-11-01-2021 - Copy\Forms\frmProductCheckHistory1.cs:line 417
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at System.Windows.Forms.Control.Invoke(Delegate method)
+   at BMS.frmProductCheckHistory1.checkColorCD() in D:\project\Sumitomo\Line\Altax\Line\current\Line-11-01-2021 - Copy\Forms\frmProductCheckHistory1.cs:line 345
+16:51:20:threadShowAndonDetails(): System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'frmProductCheckHistory1'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at System.Windows.Forms.Control.Invoke(Delegate method)
+   at System.Windows.Forms.Control.Invoke(Delegate method)
+   at BMS.frmProductCheckHistory1.checkColorCD()
+   at BMS.frmProductCheckHistory1.threadShowAndonDetails()
