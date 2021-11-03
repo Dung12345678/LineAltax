@@ -8534,4 +8534,3 @@ D:\project\Sumitomo\Line\Altax\Line\Line-27-07-2021\Forms\obj\x86\Debug\Forms.cs
 D:\project\Sumitomo\Line\Altax\Line\Line-27-07-2021\Forms\obj\x86\Debug\Forms.dll
 D:\project\Sumitomo\Line\Altax\Line\Line-27-07-2021\Forms\obj\x86\Debug\Forms.pdb
 D:\project\Sumitomo\Line\Altax\Line\Line-27-07-2021\Forms\obj\x86\Debug\Forms.csproj.AssemblyReference.cache
-D:\project\Sumitomo\Line\Altax\Line\Line-27-07-2021\Forms\obj\x86\Debug\Forms.dll.licenses

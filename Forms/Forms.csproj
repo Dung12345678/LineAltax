@@ -175,6 +175,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddLog\ErrorLog.cs" />
+    <Compile Include="AddLog\MessenBoxShow.cs" />
     <Compile Include="CanMo\frmCanMo.cs">
       <SubType>Form</SubType>
     </Compile>

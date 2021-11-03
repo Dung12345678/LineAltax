@@ -1,0 +1,3 @@
+14:37:01:threadShowAndonDetails(): System.IndexOutOfRangeException: Cannot find table 0.
+   at System.Data.DataTableCollection.get_Item(Int32 index)
+   at BMS.frmProductCheckHistory1.threadShowAndonDetails() in D:\project\Sumitomo\Line\Altax\Line\Line-27-07-2021\Forms\frmProductCheckHistory1.cs:line 475

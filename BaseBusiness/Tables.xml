@@ -1,10 +1,10 @@
 <Tables>
 
 	<Table>
-		<name>ProductionPlan</name>
+		<name>Product</name>
 		<column>
 			<name>iD</name>
-			<dataType>bigint</dataType>
+			<dataType>int</dataType>
 			<isPK>true</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
@@ -13,304 +13,1074 @@
 			<number>0</number>
 		</column>
 		<column>
-			<name>assemblyProduct</name>
-			<dataType>nvarchar</dataType>
+			<name>productGroupID</name>
+			<dataType>int</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Assembly Product</alias>
+			<alias>ProductGroup</alias>
 			<number>1</number>
 		</column>
 		<column>
-			<name>stt</name>
-			<dataType>int</dataType>
-			<isPK>false</isPK>
-			<isFK>false</isFK>
-			<isUnique>false</isUnique>
-			<tableRelate></tableRelate>
-			<alias>Stt</alias>
-			<number>2</number>
-		</column>
-		<column>
-			<name>jgDate</name>
-			<dataType>datetime</dataType>
-			<isPK>false</isPK>
-			<isFK>false</isFK>
-			<isUnique>false</isUnique>
-			<tableRelate></tableRelate>
-			<alias>Jg Date</alias>
-			<number>3</number>
-		</column>
-		<column>
-			<name>orderCode</name>
+			<name>productGroupCode</name>
 			<dataType>nvarchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Order Code</alias>
-			<number>4</number>
+			<alias>Product Group Code</alias>
+			<number>2</number>
 		</column>
 		<column>
-			<name>cnt</name>
+			<name>productTypeID</name>
 			<dataType>int</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Cnt</alias>
-			<number>5</number>
+			<alias>ProductType</alias>
+			<number>3</number>
+		</column>
+		<column>
+			<name>maVanBan</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Ma Van Ban</alias>
+			<number>4</number>
 		</column>
 		<column>
 			<name>productCode</name>
-			<dataType>varchar</dataType>
+			<dataType>nvarchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
 			<alias>Product Code</alias>
+			<number>5</number>
+		</column>
+		<column>
+			<name>productName</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Product Name</alias>
 			<number>6</number>
 		</column>
 		<column>
-			<name>description</name>
+			<name>ratioCode</name>
 			<dataType>nvarchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Description</alias>
+			<alias>Ratio Code</alias>
 			<number>7</number>
 		</column>
 		<column>
-			<name>realQty</name>
-			<dataType>int</dataType>
-			<isPK>false</isPK>
-			<isFK>false</isFK>
-			<isUnique>false</isUnique>
-			<tableRelate></tableRelate>
-			<alias>Real Qty</alias>
-			<number>8</number>
-		</column>
-		<column>
-			<name>qty</name>
-			<dataType>int</dataType>
-			<isPK>false</isPK>
-			<isFK>false</isFK>
-			<isUnique>false</isUnique>
-			<tableRelate></tableRelate>
-			<alias>Qty</alias>
-			<number>9</number>
-		</column>
-		<column>
-			<name>salesOrder</name>
-			<dataType>varchar</dataType>
-			<isPK>false</isPK>
-			<isFK>false</isFK>
-			<isUnique>false</isUnique>
-			<tableRelate></tableRelate>
-			<alias>Sales Order</alias>
-			<number>10</number>
-		</column>
-		<column>
-			<name>shipTo</name>
-			<dataType>varchar</dataType>
-			<isPK>false</isPK>
-			<isFK>false</isFK>
-			<isUnique>false</isUnique>
-			<tableRelate></tableRelate>
-			<alias>Ship To</alias>
-			<number>11</number>
-		</column>
-		<column>
-			<name>sVia</name>
-			<dataType>varchar</dataType>
-			<isPK>false</isPK>
-			<isFK>false</isFK>
-			<isUnique>false</isUnique>
-			<tableRelate></tableRelate>
-			<alias>S Via</alias>
-			<number>12</number>
-		</column>
-		<column>
-			<name>code</name>
-			<dataType>varchar</dataType>
-			<isPK>false</isPK>
-			<isFK>false</isFK>
-			<isUnique>false</isUnique>
-			<tableRelate></tableRelate>
-			<alias>Code</alias>
-			<number>13</number>
-		</column>
-		<column>
-			<name>orderNew</name>
-			<dataType>varchar</dataType>
-			<isPK>false</isPK>
-			<isFK>false</isFK>
-			<isUnique>false</isUnique>
-			<tableRelate></tableRelate>
-			<alias>Order New</alias>
-			<number>14</number>
-		</column>
-		<column>
-			<name>productCodeNew</name>
-			<dataType>varchar</dataType>
-			<isPK>false</isPK>
-			<isFK>false</isFK>
-			<isUnique>false</isUnique>
-			<tableRelate></tableRelate>
-			<alias>Product Code New</alias>
-			<number>15</number>
-		</column>
-		<column>
-			<name>note</name>
+			<name>slowSpeedShaftDimesion</name>
 			<dataType>nvarchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Note</alias>
+			<alias>Slow Speed Shaft Dimesion</alias>
+			<number>8</number>
+		</column>
+		<column>
+			<name>doDao</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Do Dao</alias>
+			<number>9</number>
+		</column>
+		<column>
+			<name>mURATA</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>M U R A T A</alias>
+			<number>10</number>
+		</column>
+		<column>
+			<name>motorCode</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Motor Code</alias>
+			<number>11</number>
+		</column>
+		<column>
+			<name>mauSon</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Mau Son</alias>
+			<number>12</number>
+		</column>
+		<column>
+			<name>giamTocTong</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Giam Toc Tong</alias>
+			<number>13</number>
+		</column>
+		<column>
+			<name>tiengOn</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Tieng On</alias>
+			<number>14</number>
+		</column>
+		<column>
+			<name>pinNumber</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Pin Number</alias>
+			<number>15</number>
+		</column>
+		<column>
+			<name>loaiMo</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Loai Mo</alias>
 			<number>16</number>
 		</column>
 		<column>
-			<name>requestDate</name>
-			<dataType>datetime</dataType>
+			<name>luongMo</name>
+			<dataType>decimal</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Request Date</alias>
+			<alias>Luong Mo</alias>
 			<number>17</number>
 		</column>
 		<column>
-			<name>cycloDick</name>
-			<dataType>varchar</dataType>
+			<name>mEDEDAY</name>
+			<dataType>datetime</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Cyclo Dick</alias>
+			<alias>M E D E D A Y</alias>
 			<number>18</number>
 		</column>
 		<column>
-			<name>updatedAt</name>
-			<dataType>datetime</dataType>
+			<name>coilCode</name>
+			<dataType>nvarchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Updated At</alias>
+			<alias>Coil Code</alias>
 			<number>19</number>
 		</column>
 		<column>
-			<name>createdAt</name>
-			<dataType>datetime</dataType>
+			<name>lucCheckGearMotor</name>
+			<dataType>nvarchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Created At</alias>
+			<alias>Luc Check Gear Motor</alias>
 			<number>20</number>
 		</column>
 		<column>
-			<name>status</name>
-			<dataType>int</dataType>
+			<name>lucCheckGear</name>
+			<dataType>nvarchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Status</alias>
+			<alias>Luc Check Gear</alias>
 			<number>21</number>
 		</column>
 		<column>
-			<name>priority</name>
-			<dataType>bit</dataType>
+			<name>huongHopCau</name>
+			<dataType>nvarchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Priority</alias>
+			<alias>Huong Hop Cau</alias>
 			<number>22</number>
 		</column>
 		<column>
-			<name>maMoto</name>
-			<dataType>varchar</dataType>
+			<name>unitMotor</name>
+			<dataType>nvarchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Ma Moto</alias>
+			<alias>Unit Motor</alias>
 			<number>23</number>
 		</column>
 		<column>
-			<name>maMoto1</name>
-			<dataType>varchar</dataType>
+			<name>loai2TrucCoChan</name>
+			<dataType>nvarchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Ma Moto1</alias>
+			<alias>Loai2 Truc Co Chan</alias>
 			<number>24</number>
 		</column>
 		<column>
-			<name>assemblyDate</name>
+			<name>productDate</name>
 			<dataType>datetime</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Assembly Date</alias>
+			<alias>Product Date</alias>
 			<number>25</number>
 		</column>
 		<column>
-			<name>deliveryDate</name>
+			<name>createdBy</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Created By</alias>
+			<number>26</number>
+		</column>
+		<column>
+			<name>createdDate</name>
 			<dataType>datetime</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Delivery Date</alias>
-			<number>26</number>
+			<alias>Created Date</alias>
+			<number>27</number>
 		</column>
 		<column>
-			<name>orderCodeFull</name>
+			<name>updatedBy</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Updated By</alias>
+			<number>28</number>
+		</column>
+		<column>
+			<name>updatedDate</name>
+			<dataType>datetime</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Updated Date</alias>
+			<number>29</number>
+		</column>
+		<column>
+			<name>maSungLuc</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Ma Sung Luc</alias>
+			<number>30</number>
+		</column>
+		<column>
+			<name>lucCheckGearMin</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luc Check Gear Min</alias>
+			<number>31</number>
+		</column>
+		<column>
+			<name>lucCheckGearMax</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luc Check Gear Max</alias>
+			<number>32</number>
+		</column>
+		<column>
+			<name>lucCheckGearMotorMin</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luc Check Gear Motor Min</alias>
+			<number>33</number>
+		</column>
+		<column>
+			<name>lucCheckGearMotorMax</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luc Check Gear Motor Max</alias>
+			<number>34</number>
+		</column>
+		<column>
+			<name>gunNumber</name>
+			<dataType>int</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Gun Number</alias>
+			<number>35</number>
+		</column>
+		<column>
+			<name>jobNumber</name>
+			<dataType>int</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Job Number</alias>
+			<number>36</number>
+		</column>
+		<column>
+			<name>qtyOcBanGa</name>
+			<dataType>int</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Qty Oc Ban Ga</alias>
+			<number>37</number>
+		</column>
+		<column>
+			<name>qtyOcBanThat</name>
+			<dataType>int</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Qty Oc Ban That</alias>
+			<number>38</number>
+		</column>
+		<column>
+			<name>productTypeCode</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Product Type Code</alias>
+			<number>39</number>
+		</column>
+		<column>
+			<name>buLongNumber</name>
+			<dataType>int</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Bu Long Number</alias>
+			<number>40</number>
+		</column>
+		<column>
+			<name>shootNumber</name>
+			<dataType>int</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Shoot Number</alias>
+			<number>41</number>
+		</column>
+		<column>
+			<name>setForce</name>
+			<dataType>int</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Set Force</alias>
+			<number>42</number>
+		</column>
+		<column>
+			<name>pinNumberIN</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Pin Number I N</alias>
+			<number>43</number>
+		</column>
+		<column>
+			<name>sizeSSSMin</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Size S S S Min</alias>
+			<number>44</number>
+		</column>
+		<column>
+			<name>sizeSSSMax</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Size S S S Max</alias>
+			<number>45</number>
+		</column>
+		<column>
+			<name>doDao1Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Do Dao1 Min</alias>
+			<number>46</number>
+		</column>
+		<column>
+			<name>doDao1Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Do Dao1 Max</alias>
+			<number>47</number>
+		</column>
+		<column>
+			<name>doDao2Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Do Dao2 Min</alias>
+			<number>48</number>
+		</column>
+		<column>
+			<name>doDao2Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Do Dao2 Max</alias>
+			<number>49</number>
+		</column>
+		<column>
+			<name>doDao3Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Do Dao3 Min</alias>
+			<number>50</number>
+		</column>
+		<column>
+			<name>doDao3Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Do Dao3 Max</alias>
+			<number>51</number>
+		</column>
+		<column>
+			<name>doDao4Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Do Dao4 Min</alias>
+			<number>52</number>
+		</column>
+		<column>
+			<name>doDao4Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Do Dao4 Max</alias>
+			<number>53</number>
+		</column>
+		<column>
+			<name>luongMo1Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo1 Min</alias>
+			<number>54</number>
+		</column>
+		<column>
+			<name>luongMo1Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo1 Max</alias>
+			<number>55</number>
+		</column>
+		<column>
+			<name>luongMo2Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo2 Min</alias>
+			<number>56</number>
+		</column>
+		<column>
+			<name>luongMo2Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo2 Max</alias>
+			<number>57</number>
+		</column>
+		<column>
+			<name>luongMo3Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo3 Min</alias>
+			<number>58</number>
+		</column>
+		<column>
+			<name>luongMo3Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo3 Max</alias>
+			<number>59</number>
+		</column>
+		<column>
+			<name>luongMo4Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo4 Min</alias>
+			<number>60</number>
+		</column>
+		<column>
+			<name>luongMo4Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo4 Max</alias>
+			<number>61</number>
+		</column>
+		<column>
+			<name>luongMo5Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo5 Min</alias>
+			<number>62</number>
+		</column>
+		<column>
+			<name>luongMo5Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo5 Max</alias>
+			<number>63</number>
+		</column>
+		<column>
+			<name>luongMo6Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo6 Min</alias>
+			<number>64</number>
+		</column>
+		<column>
+			<name>luongMo6Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo6 Max</alias>
+			<number>65</number>
+		</column>
+		<column>
+			<name>luongMo7Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo7 Min</alias>
+			<number>66</number>
+		</column>
+		<column>
+			<name>luongMo7Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luong Mo7 Max</alias>
+			<number>67</number>
+		</column>
+		<column>
+			<name>spaceCenterMin</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Space Center Min</alias>
+			<number>68</number>
+		</column>
+		<column>
+			<name>spaceCenterMax</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Space Center Max</alias>
+			<number>69</number>
+		</column>
+		<column>
+			<name>dienAp</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Dien Ap</alias>
+			<number>70</number>
+		</column>
+		<column>
+			<name>tanSo</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Tan So</alias>
+			<number>71</number>
+		</column>
+		<column>
+			<name>dongDienMin</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Dong Dien Min</alias>
+			<number>72</number>
+		</column>
+		<column>
+			<name>dongDienMax</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Dong Dien Max</alias>
+			<number>73</number>
+		</column>
+		<column>
+			<name>nhapLucMin</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Nhap Luc Min</alias>
+			<number>74</number>
+		</column>
+		<column>
+			<name>nhapLucMax</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Nhap Luc Max</alias>
+			<number>75</number>
+		</column>
+		<column>
+			<name>vongQuayMin</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Vong Quay Min</alias>
+			<number>76</number>
+		</column>
+		<column>
+			<name>vongQuayMax</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Vong Quay Max</alias>
+			<number>77</number>
+		</column>
+		<column>
+			<name>tiengOnMin</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Tieng On Min</alias>
+			<number>78</number>
+		</column>
+		<column>
+			<name>tiengOnMax</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Tieng On Max</alias>
+			<number>79</number>
+		</column>
+		<column>
+			<name>doRungFFTMin</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Do Rung F F T Min</alias>
+			<number>80</number>
+		</column>
+		<column>
+			<name>doRungFFTMax</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Do Rung F F T Max</alias>
+			<number>81</number>
+		</column>
+		<column>
+			<name>spaceCycloidDiskMin</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Space Cycloid Disk Min</alias>
+			<number>82</number>
+		</column>
+		<column>
+			<name>spaceCycloidDiskMax</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Space Cycloid Disk Max</alias>
+			<number>83</number>
+		</column>
+		<column>
+			<name>differenceMin</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Difference Min</alias>
+			<number>84</number>
+		</column>
+		<column>
+			<name>differenceMax</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Difference Max</alias>
+			<number>85</number>
+		</column>
+		<column>
+			<name>lucCheck3Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luc Check3 Min</alias>
+			<number>86</number>
+		</column>
+		<column>
+			<name>lucCheck3Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luc Check3 Max</alias>
+			<number>87</number>
+		</column>
+		<column>
+			<name>lucCheck4Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luc Check4 Min</alias>
+			<number>88</number>
+		</column>
+		<column>
+			<name>lucCheck4Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luc Check4 Max</alias>
+			<number>89</number>
+		</column>
+		<column>
+			<name>lucCheck5Max</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luc Check5 Max</alias>
+			<number>90</number>
+		</column>
+		<column>
+			<name>lucCheck5Min</name>
+			<dataType>decimal</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Luc Check5 Min</alias>
+			<number>91</number>
+		</column>
+		<column>
+			<name>sSS</name>
 			<dataType>varchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Order Code Full</alias>
-			<number>27</number>
+			<alias>S S S</alias>
+			<number>92</number>
 		</column>
 		<column>
-			<name>prints</name>
-			<dataType>bit</dataType>
+			<name>cARRIER</name>
+			<dataType>varchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Prints</alias>
-			<number>28</number>
+			<alias>C A R R I E R</alias>
+			<number>93</number>
 		</column>
 		<column>
-			<name>qtyNG</name>
-			<dataType>int</dataType>
+			<name>cYCLODISK</name>
+			<dataType>varchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Qty N G</alias>
-			<number>29</number>
+			<alias>C Y C L O D I S K</alias>
+			<number>94</number>
 		</column>
 		<column>
-			<name>show</name>
-			<dataType>int</dataType>
+			<name>rGH</name>
+			<dataType>varchar</dataType>
 			<isPK>false</isPK>
 			<isFK>false</isFK>
 			<isUnique>false</isUnique>
 			<tableRelate></tableRelate>
-			<alias>Show</alias>
-			<number>30</number>
+			<alias>R G H</alias>
+			<number>95</number>
+		</column>
+		<column>
+			<name>bEFORECOVER</name>
+			<dataType>varchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>B E F O R E C O V E R</alias>
+			<number>96</number>
+		</column>
+		<column>
+			<name>aFTERCOVER</name>
+			<dataType>varchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>A F T E R C O V E R</alias>
+			<number>97</number>
+		</column>
+		<column>
+			<name>sSS2</name>
+			<dataType>varchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>S S S2</alias>
+			<number>98</number>
+		</column>
+		<column>
+			<name>cARRIER2</name>
+			<dataType>varchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>C A R R I E R2</alias>
+			<number>99</number>
+		</column>
+		<column>
+			<name>cYCLODISK2</name>
+			<dataType>varchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>C Y C L O D I S K2</alias>
+			<number>100</number>
+		</column>
+		<column>
+			<name>rGH2</name>
+			<dataType>varchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>R G H2</alias>
+			<number>101</number>
+		</column>
+		<column>
+			<name>bEFORECOVER2</name>
+			<dataType>varchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>B E F O R E C O V E R2</alias>
+			<number>102</number>
+		</column>
+		<column>
+			<name>aFTERCOVER2</name>
+			<dataType>varchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>A F T E R C O V E R2</alias>
+			<number>103</number>
+		</column>
+		<column>
+			<name>goal</name>
+			<dataType>nvarchar</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Goal</alias>
+			<number>104</number>
+		</column>
+		<column>
+			<name>engineWeightMin</name>
+			<dataType>float</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Engine Weight Min</alias>
+			<number>105</number>
+		</column>
+		<column>
+			<name>engineWeightMax</name>
+			<dataType>float</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Engine Weight Max</alias>
+			<number>106</number>
+		</column>
+		<column>
+			<name>engineWeight</name>
+			<dataType>float</dataType>
+			<isPK>false</isPK>
+			<isFK>false</isFK>
+			<isUnique>false</isUnique>
+			<tableRelate></tableRelate>
+			<alias>Engine Weight</alias>
+			<number>107</number>
 		</column>
 	</Table>
 

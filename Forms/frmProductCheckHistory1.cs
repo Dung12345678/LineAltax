@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Base;
+using System.IO.Ports;
 
 namespace BMS
 {
@@ -38,10 +39,13 @@ namespace BMS
 		string _AritelID = "";
 		string _productCode = "";
 		string _tienTo = "";
+		string data="";
 		int RowCan = 99999;
+		int _RowSauPCA = 999;
 		string CDOld = "";
 		string _stt = "";
 		List<string> _lstCD = new List<string>();
+		ProductModel _Product = new ProductModel();
 		int _workingStepID = 9999;
 		int _RowMotor = 999;
 		int _stepIndex = 0;
@@ -53,6 +57,10 @@ namespace BMS
 		int _RowPin = 999;
 		int _RowPinSL = 999;
 		int _PlanID = 9999;
+		string RealFat = "0";
+		double _EngineWeightMin = 0;
+		double _EngineWeightMax = 0;
+		double _EngineWeight = 0;
 		int rowOld = 9999;
 		bool _Print = false;
 		//Danh sách dòng #1#
@@ -76,34 +84,44 @@ namespace BMS
 		string _socketIPAddress = "192.168.1.46";
 		int _socketPort = 3000;
 		Socket _socket;
+		SerialPort Comport;
 		ASCIIEncoding _encoding = new ASCIIEncoding();
 
 		string Sub = "";
+		public int _indexColumSauPCA = 0;
 		int _taktTime = 10;
 		string _step;
+		double _PlateWeight = 0;
+		double _JigWeight = 0;
 		int andonActive = 0;
 		int _currentStatus = 999;
 		bool _enable = true;
 		int _focusColumns = 0;
+		int timeout = 0;
+		string _DataSendCom = "";
+		bool _CheckTimeOutFat;
 		int row = 9999;// Hiển thị dòng trong grid dag focus
 		int column = 9999;// hiển thị cột trong grid đag focus
 		DataTable _DataShipTo = new DataTable();
 		frmPrint _frm;
 
+		string pathConfigFitRow = Application.StartupPath + "/ConfigFitRow.txt";
 		string pathSub = Application.StartupPath + "/Sub.txt";
+		string pathConfigFat = Application.StartupPath + "/ConfigFat.txt";
 		int _PeriodTime = 0;
 		string CD = "";
+		string FatContent = "";
 		int _status = 0;
 		bool _isStart = false;
 		bool _isLogin = false;
 		DateTime _startMakeTime;
 		DateTime _endMakeTime;
-
 		DateTime _sTimeRisk;
 		DateTime _eTimeRisk;
 		DataTable _dtData = new DataTable();
 		AndonModel _oAndonModel = new AndonModel();
 		ProductionPlanModel _Planmodel = new ProductionPlanModel();
+		string _ColumnNameSauPCA = "";
 
 		private string _pathFileBanDo = Path.Combine(Application.StartupPath, "BanDo.txt");
 		string _pathFileConfigUpdate = Path.Combine(Application.StartupPath, "ConfigUpdate.txt");
@@ -120,6 +138,16 @@ namespace BMS
 			if (!File.Exists(pathSub))
 			{
 				File.WriteAllText(pathSub, "0");
+			}
+			if (File.Exists(pathConfigFitRow))
+			{
+				string valueFit = File.ReadAllText(pathConfigFitRow);
+				chkFitRow.Checked = TextUtils.ToInt(valueFit) == 0 ? false : true;
+			}
+			if (File.Exists(pathConfigFat))
+			{
+				string valueFat = File.ReadAllText(pathConfigFat);
+				chkFat.Checked = TextUtils.ToInt(valueFat) == 0 ? false : true;
 			}
 		}
 		private void frmProductCheckHistory1_Load(object sender, EventArgs e)
@@ -830,10 +858,11 @@ namespace BMS
 			if (_stepCode == "CD8-1") _stepCode = "CD81";
 			row = indexRow;
 			column = indexColum;
+			
 			if (indexRow <= grvData.RowCount - 1)
 			{
 				grvData.FocusedRowHandle = indexRow;
-
+				_indexColumSauPCA = indexColum;
 				grvData.FocusedColumn = grvData.VisibleColumns[indexColum];
 
 				grvData.ShowEditor();
@@ -923,11 +952,127 @@ namespace BMS
 				btnSave.Visible = false;
 			}
 			loadGridData();
+			//Kết nối cổng com
+			if (cboWorkingStep.Text.Trim().Contains("TP-"))
+			{
+
+				if (Comport != null && Comport.IsOpen)
+				{
+				}
+				else
+				{.
+					if (chkFat.Checked)
+					{
+						// Kết nối Com
+						ConnectCom();
+					}
+				}
+
+
+			}
 			//Check bỏ qua công đoạn
 			if (CheckSkipCD(0, 0) == false)
 			{
 				MessageBox.Show($"Sản phẩm chưa đi qua công đoạn {CDOld}");
 			}
+		}
+		void ConnectCom()
+		{
+			try
+			{
+				Comport = new SerialPort("COM131", 9600, Parity.Even, 8, StopBits.One);
+				Comport.Open();
+				Comport.DataReceived += new SerialDataReceivedEventHandler(DataReceivedEventHandler);
+			}
+			catch
+			{
+
+			}
+		}
+		public void DataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e)
+		{
+			try
+			{
+				// Đọc Com 
+				byte[] buffer = new byte[100];//Có 100 phần tử 
+				int LengthData = Comport.Read(buffer, 0, buffer.Length);
+				if (buffer[LengthData - 2] == (0x0d) && buffer[LengthData - 1] == (0x00a))
+				{
+					data = Encoding.ASCII.GetString(buffer, 0, LengthData - 2);
+					if (data == "OK" || data == "OKSM" || data == "OKNOSM")
+					{
+						_CheckTimeOutFat = false;
+						Checktimeout.Stop();
+						timeout = 0;
+						RealFat = "0";
+						//RealFatContentMin = 9999;
+						//RealFatContentMax = 9999;
+						FatContent = "";
+						//Average = 9999;
+					}
+					if (data.Contains("@"))
+					{
+						_CheckTimeOutFat = false;
+						Checktimeout.Stop();
+						timeout = 0;
+						string value = data.Split('@')[0];
+						UpdateWeightProduct(value);
+					}
+				}
+			}
+			catch
+			{
+
+			}
+		}
+		async void UpdateWeightProduct(string value)
+		{
+			Task task = Task.Factory.StartNew(() =>
+			{
+				try
+				{
+					double Weight = TextUtils.ToDouble(value.Trim()) - _PlateWeight - _JigWeight;
+					double WeightMin = Weight - 200;
+					double WeightMax = Weight + 200;
+					string Standard = WeightMin + "~" + WeightMax;
+					this.Invoke((MethodInvoker)delegate
+					{
+						int ValueMax = TextUtils.ToInt(TextUtils.ToDouble(grvData.GetRowCellValue(_RowSauPCA, colMaxValue)));
+						if (ValueMax == 0)
+						{
+							SetValue(_RowSauPCA, WeightMin, WeightMax, Standard);
+
+							//Check đã có giá trị chưa nếu chưa thì update có rồi thì thôi
+							ProductModel product = (ProductModel)ProductBO.Instance.FindByPK(_productID);
+							product.EngineWeight = Weight;
+							product.EngineWeightMax = WeightMax;
+							product.EngineWeightMin = WeightMin;
+
+							ProductBO.Instance.Update(product);
+							//SendCom("OKDONE");
+
+							//ProductModel product1 = (ProductModel)ProductBO.Instance.FindByPK(_IDProduct);
+							//if (product1.EngineWeight != 0)
+							//{
+							//	SendCom("NOSM");
+							//}
+						}
+						//điền giá trị lên con trỏ chuột
+						string HID = Weight + "\n";
+						//SendDataToHID(HID);
+						grvData.SetRowCellValue(_RowSauPCA, _ColumnNameSauPCA, HID);
+						//grvData.SetFocusedRowCellValue(_ColumnNameSauPCA, HID);
+					});
+				}
+				catch (Exception ex)
+				{
+					ErrorLog.errorLog($"{ex}", "Lỗi khi gửi OKDone ,NOSM và điền giá trị HID", Environment.NewLine);
+				}
+			}
+			);
+
+			await task;
+
 		}
 		bool CheckSkipCD(int TextOrCb, int columnIndex)
 		{
@@ -1064,12 +1209,15 @@ namespace BMS
 				new object[] { _workingStepID, stepCode, arr1[1].ToString() });
 			if (ds.Tables.Count == 0) return;
 			_dtData = ds.Tables[0];
-
+		
 			txtStepName.Text = TextUtils.ToString(ds.Tables[1].Rows.Count > 0 ? ds.Tables[1].Rows[0][0] : "");
 
 			_GroupCode = TextUtils.ToString(ds.Tables[2].Rows.Count > 0 ? ds.Tables[2].Rows[0]["ProductGroupCode"] : "");
 			txtName.Text = TextUtils.ToString(ds.Tables[2].Rows.Count > 0 ? ds.Tables[2].Rows[0]["ProductName"] : "");
 			txtMo.Text = TextUtils.ToString(ds.Tables[2].Rows.Count > 0 ? ds.Tables[2].Rows[0]["LoaiMo"] : "");
+			_EngineWeightMin = TextUtils.ToDouble(ds.Tables[2].Rows.Count > 0 ? ds.Tables[2].Rows[0]["EngineWeightMin"] : 0);
+			_EngineWeightMax = TextUtils.ToDouble(ds.Tables[2].Rows.Count > 0 ? ds.Tables[2].Rows[0]["EngineWeightMax"] : 0);
+			_EngineWeight = TextUtils.ToDouble(ds.Tables[2].Rows.Count > 0 ? ds.Tables[2].Rows[0]["EngineWeight"] : 0);
 			//txtGoal.Text = TextUtils.ToString(ds.Tables[2].Rows.Count > 0 ? ds.Tables[2].Rows[0]["Goal"] : "");
 			//Hiển thị Công đoạn bỏ qua của PID 
 			string CDSkip = TextUtils.ToString(TextUtils.ExcuteScalar($"SELECT Top 1 CDSkip FROM SkipCD WHERE Product='{TextUtils.ToString(arr1[1])}'"));
@@ -1078,6 +1226,9 @@ namespace BMS
 			string jobNumber = TextUtils.ToString(ds.Tables[2].Rows.Count > 0 ? ds.Tables[2].Rows[0]["JobNumber"] : "");
 			string qtyOcBanGa = TextUtils.ToString(ds.Tables[2].Rows.Count > 0 ? ds.Tables[2].Rows[0]["QtyOcBanGa"] : "");
 			string qtyOcBanThat = TextUtils.ToString(ds.Tables[2].Rows.Count > 0 ? ds.Tables[2].Rows[0]["QtyOcBanThat"] : "");
+
+			_PlateWeight = TextUtils.ToDouble(ds.Tables[2].Rows.Count > 0 ? ds.Tables[2].Rows[0]["PlateWeight"] : 0);
+			_JigWeight = TextUtils.ToDouble(ds.Tables[2].Rows.Count > 0 ? ds.Tables[2].Rows[0]["JigWeight"] : 0);
 			_productID = TextUtils.ToInt(ds.Tables[2].Rows.Count > 0 ? ds.Tables[2].Rows[0]["ID"] : "");
 			if (_DataShipTo != null && _DataShipTo.Rows.Count != 0)
 			{
@@ -1093,6 +1244,21 @@ namespace BMS
 			for (int i = 0; i < grvData.RowCount; i++)
 			{
 				string ProductWorkingName = TextUtils.ToString(grvData.GetRowCellValue(i, colProductWorkingName));
+				if (ProductWorkingName.ToUpper().Contains("#2#"))
+				{
+					_RowSauPCA = i;
+					if (cboWorkingStep.Text.Trim().Contains("TP-"))
+					{
+						//Check giá trị tiêu chuẩn có chưa + Giá trị khối lượng (có rồi ) thì thêm vào 
+						int Stand = TextUtils.ToInt(TextUtils.ToDouble(grvData.GetRowCellValue(_RowSauPCA, colMaxValue)));
+						if (Stand == 0 && _EngineWeight != 0 && _EngineWeightMax != 0)
+						{
+							string StandValue = _EngineWeightMin + "~" + _EngineWeightMax;
+							//Gán giá trị min max và giá trị tiêu chuẩn lên grv
+							SetValue(_RowSauPCA, _EngineWeightMin, _EngineWeightMax, StandValue);
+						}
+					}
+				}
 				if (ProductWorkingName.ToUpper().Contains("#5#"))
 				{
 					//lấy dòng motor
@@ -1206,6 +1372,13 @@ namespace BMS
 
 			setCaptionGridColumn();
 
+
+		}
+		void SetValue(int Row, double Min, double Max, string Standar)
+		{
+			grvData.SetRowCellValue(Row, colStandardValue, Standar);
+			grvData.SetRowCellValue(Row, colMinValue, Min);
+			grvData.SetRowCellValue(Row, colMaxValue, Max);
 
 		}
 		void LoadConfigShipTo()
@@ -2489,6 +2662,123 @@ namespace BMS
 			frm._SLCanMo = new SLCanMo(sendData);
 			frm.Show();
 			frm.Activate();
+		}
+
+		private void chkFitRow_CheckedChanged(object sender, EventArgs e)
+		{
+			if (chkFitRow.Checked)
+			{
+				if (grvData.RowCount > 0)
+				{
+					grvData.RowHeight = -1;
+					int totalHeightRow = this.getSumHeightRows();
+					if ((oldHeightGrid - grvData.ColumnPanelRowHeight - 30) > totalHeightRow)
+					{
+						grvData.RowHeight = (oldHeightGrid - grvData.ColumnPanelRowHeight - 30) / grvData.RowCount;
+					}
+				}
+			}
+			else
+			{
+				grvData.RowHeight = -1;
+				//loadGridData();
+			}
+			File.WriteAllText(pathConfigFitRow, chkFitRow.Checked ? "1" : "0");
+		}
+
+		private void chkFat_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!chkFat.Checked)
+			{
+				_CheckTimeOutFat = false;
+				Checktimeout.Stop();
+			}
+			File.WriteAllText(pathConfigFat, chkFat.Checked ? "1" : "0");
+		}
+
+		private void Checktimeout_Tick(object sender, EventArgs e)
+		{
+			if (_CheckTimeOutFat == true)
+			{
+				timeout = timeout + 1;
+				if (timeout == 20)
+				{
+					MessageBox.Show("Xin hãy bật phần mềm cân", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					SendCom(_DataSendCom);
+					timeout = 0;
+				}
+			}
+		}
+		public void SendCom(string data)
+		{
+			try
+			{
+				if (timeout == 20)
+				{
+					byte[] header = { };// chèn ký tự đặc biệt ở đầu
+					byte[] arraydata = Encoding.ASCII.GetBytes(data);//chuyển dữ liệu từ dạng string sang dạng mảng byte
+					byte[] terminal = { 0x0d, 0x0a };// chèn ký tự đặc biệt ở cuối
+					byte[] TotalDataSend = new byte[arraydata.Length + terminal.Length]; // tổng số phần tử trong mảng TotalData
+					/// gán 2 mảng byte vào 1 mảng lớn
+					//header.CopyTo(TotalDataSend, 0);
+					//arraydata.CopyTo(TotalDataSend, header.Length);
+					// Gửi dữ liệu
+					arraydata.CopyTo(TotalDataSend, 0);
+					terminal.CopyTo(TotalDataSend, arraydata.Length);
+					Comport.Write(TotalDataSend, 0, TotalDataSend.Length);
+				}
+				else
+				{
+					_CheckTimeOutFat = true;
+					Checktimeout.Start();
+					_DataSendCom = data;
+					byte[] header = { };// chèn ký tự đặc biệt ở đầu
+					byte[] arraydata = Encoding.ASCII.GetBytes(data);//chuyển dữ liệu từ dạng string sang dạng mảng byte
+					byte[] terminal = { 0x0d, 0x0a };// chèn ký tự đặc biệt ở cuối
+					byte[] TotalDataSend = new byte[arraydata.Length + terminal.Length]; // tổng số phần tử trong mảng TotalData
+					/// gán 2 mảng byte vào 1 mảng lớn
+					//header.CopyTo(TotalDataSend, 0);
+					//arraydata.CopyTo(TotalDataSend, header.Length);
+					// Gửi dữ liệu
+					arraydata.CopyTo(TotalDataSend, 0);
+					terminal.CopyTo(TotalDataSend, arraydata.Length);
+					Comport.Write(TotalDataSend, 0, TotalDataSend.Length);
+				}
+			}
+			catch
+			{
+				MessageBox.Show("Lỗi time out", "Thông báo", MessageBoxButtons.OK);
+			}
+
+
+		}
+
+		private void setWeightToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (cboWorkingStep.Text.Trim().Contains("TP-"))
+			{
+				_ColumnNameSauPCA = "RealValue" + (_indexColumSauPCA - 2);
+				try
+				{
+					if (chkFat.Checked && cboWorkingStep.Text.Trim().Contains("TP-"))
+					{
+						_Product = (ProductModel)ProductBO.Instance.FindByAttribute("ProductCode", _ProductCode)[0];
+						if (_Product.EngineWeight == 0 && _Product.EngineWeightMax == 0 && _Product.EngineWeightMin == 0)
+						{
+							SendCom("SM");
+						}
+						else
+						{
+							SendCom("NOSM");
+						}
+
+					}
+				}
+				catch (Exception ex)
+				{
+					ErrorLog.errorLog("Lỗi gửi tín hiệu cho CD sau PCA", "Lỗi Gửi value", Environment.NewLine);
+				}
+			}
 		}
 	}
 }

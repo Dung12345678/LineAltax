@@ -97,6 +97,10 @@ namespace BMS
 			this.lblTakt = new System.Windows.Forms.Label();
 			this.lblCD = new System.Windows.Forms.Label();
 			this.timerShowCanMo = new System.Windows.Forms.Timer(this.components);
+			this.chkFat = new System.Windows.Forms.CheckBox();
+			this.chkFitRow = new System.Windows.Forms.CheckBox();
+			this.Checktimeout = new System.Windows.Forms.Timer(this.components);
+			this.setWeightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.grvData)).BeginInit();
@@ -672,7 +676,7 @@ namespace BMS
 			this.menuStrip1.Location = new System.Drawing.Point(282, 596);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-			this.menuStrip1.Size = new System.Drawing.Size(31, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(151, 24);
 			this.menuStrip1.TabIndex = 16;
 			this.menuStrip1.Text = "menuStrip1";
 			this.menuStrip1.Visible = false;
@@ -683,7 +687,8 @@ namespace BMS
             this.cấtToolStripMenuItem,
             this.startRiskToolStripMenuItem,
             this.endRiskToolStripMenuItem,
-            this.loginToolStripMenuItem});
+            this.loginToolStripMenuItem,
+            this.setWeightToolStripMenuItem});
 			this.aToolStripMenuItem.Name = "aToolStripMenuItem";
 			this.aToolStripMenuItem.Size = new System.Drawing.Size(25, 22);
 			this.aToolStripMenuItem.Text = "a";
@@ -729,7 +734,7 @@ namespace BMS
 			this.txtName.Location = new System.Drawing.Point(445, 68);
 			this.txtName.Name = "txtName";
 			this.txtName.ReadOnly = true;
-			this.txtName.Size = new System.Drawing.Size(832, 29);
+			this.txtName.Size = new System.Drawing.Size(728, 29);
 			this.txtName.TabIndex = 3;
 			this.txtName.TextChanged += new System.EventHandler(this.txt_TextChanged);
 			// 
@@ -837,6 +842,8 @@ namespace BMS
 			// 
 			// panelTop
 			// 
+			this.panelTop.Controls.Add(this.chkFat);
+			this.panelTop.Controls.Add(this.chkFitRow);
 			this.panelTop.Controls.Add(this.txtQtyReal);
 			this.panelTop.Controls.Add(this.txtQty);
 			this.panelTop.Controls.Add(this.label12);
@@ -1015,6 +1022,46 @@ namespace BMS
 			// 
 			this.timerShowCanMo.Tick += new System.EventHandler(this.timerShowCanMo_Tick);
 			// 
+			// chkFat
+			// 
+			this.chkFat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.chkFat.AutoSize = true;
+			this.chkFat.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.chkFat.Location = new System.Drawing.Point(1186, 74);
+			this.chkFat.Name = "chkFat";
+			this.chkFat.Size = new System.Drawing.Size(44, 17);
+			this.chkFat.TabIndex = 35;
+			this.chkFat.Text = "Fat";
+			this.chkFat.UseVisualStyleBackColor = true;
+			this.chkFat.CheckedChanged += new System.EventHandler(this.chkFat_CheckedChanged);
+			// 
+			// chkFitRow
+			// 
+			this.chkFitRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.chkFitRow.AutoSize = true;
+			this.chkFitRow.Checked = true;
+			this.chkFitRow.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.chkFitRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.chkFitRow.Location = new System.Drawing.Point(1236, 74);
+			this.chkFitRow.Name = "chkFitRow";
+			this.chkFitRow.Size = new System.Drawing.Size(40, 17);
+			this.chkFitRow.TabIndex = 34;
+			this.chkFitRow.Text = "Fit";
+			this.chkFitRow.UseVisualStyleBackColor = true;
+			this.chkFitRow.CheckedChanged += new System.EventHandler(this.chkFitRow_CheckedChanged);
+			// 
+			// Checktimeout
+			// 
+			this.Checktimeout.Tick += new System.EventHandler(this.Checktimeout_Tick);
+			// 
+			// setWeightToolStripMenuItem
+			// 
+			this.setWeightToolStripMenuItem.Name = "setWeightToolStripMenuItem";
+			this.setWeightToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
+			this.setWeightToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.setWeightToolStripMenuItem.Text = "SetWeight";
+			this.setWeightToolStripMenuItem.Click += new System.EventHandler(this.setWeightToolStripMenuItem_Click);
+			// 
 			// frmProductCheckHistory1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1117,5 +1164,9 @@ namespace BMS
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.Timer timerShowCanMo;
+		private System.Windows.Forms.CheckBox chkFat;
+		private System.Windows.Forms.CheckBox chkFitRow;
+		private System.Windows.Forms.Timer Checktimeout;
+		private System.Windows.Forms.ToolStripMenuItem setWeightToolStripMenuItem;
 	}
 }
